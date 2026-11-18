@@ -49,3 +49,8 @@ interface BodyEditorProps{
   body:string
   onChange:(body:string)=>void
 }
+
+interface ResponseViewerProps{
+  response:ResponseResult | null
+  error:string | null
+}
