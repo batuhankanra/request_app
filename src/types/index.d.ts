@@ -34,3 +34,8 @@ interface UrlProps{
   onUrlChange:(url:string)=>void
   onSend:()=>void
 }
+
+interface RequestTabProps{
+  tab:Tab
+  onChange:(tab:Tab)=>void
+}
