@@ -22,3 +22,15 @@ interface ResponseResult {
   time_ms: number;
   size_bytes: number;
 }
+
+type Tab = "headers" | body
+
+
+interface UrlProps{
+  method:Method
+  url:string
+  loading:boolean
+  onMethodChange:(m:Method)=>void
+  onUrlChange:(url:string)=>void
+  onSend:()=>void
+}
