@@ -39,3 +39,8 @@ interface RequestTabProps{
   tab:Tab
   onChange:(tab:Tab)=>void
 }
+
+interface HeaderEditorProps{
+  headers:KV[]
+  onChange:(headers:KV[])=>void
+}
