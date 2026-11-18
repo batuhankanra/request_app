@@ -44,3 +44,8 @@ interface HeaderEditorProps{
   headers:KV[]
   onChange:(headers:KV[])=>void
 }
+
+interface BodyEditorProps{
+  body:string
+  onChange:(body:string)=>void
+}
