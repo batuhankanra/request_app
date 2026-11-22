@@ -1,9 +1,11 @@
 
 type Method = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
 
-interface KV {
-  key: string;
-  value: string;
+interface Header{
+  key:string
+  value:string
+}
+interface KV  extends Header{
   enabled: boolean;
 }
 
@@ -11,13 +13,18 @@ interface RequestConfig {
   method: Method;
   url: string;
   headers: KV[];
-  body: string;
+  body: string ;
 }
-
+interface RequestPayload {
+  method: Method;
+  url: string;
+  headers: Header[];
+  body: string | null;
+}
 interface ResponseResult {
   status: number;
   status_text: string;
-  headers: [string, string][];
+  headers: Header[];
   body: string;
   time_ms: number;
   size_bytes: number;
