@@ -33,7 +33,7 @@ const ResponseViewer:React.FC<ResponseViewerProps> = ({response,error}) => {
                         response headers ({response.headers.length})
                     </summary>
                     <pre className='overflow-auto bg-neutral-950 p-3 text-xs'>
-                        {response.headers.map(([k,v])=>`${k}: ${v}`).join("\n")}
+                        {response.headers.map(({key,value})=>`${key}: ${value}`).join("\n")}
                     </pre>
                 </details>
                 <pre className='max-h-125 overflow-auto rounded bg-neutral-950 p-3 text-sm'>
