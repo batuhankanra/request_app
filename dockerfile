@@ -1,4 +1,3 @@
-# 1. aşama: frontend build
 FROM node:22-alpine AS frontend
 WORKDIR /app/frontend
 COPY frontend/package*.json ./
