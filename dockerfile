@@ -6,7 +6,6 @@ RUN npm ci
 COPY frontend/ ./
 RUN npm run build
 
-# 2. aşama: backend build
 FROM rust:1-bookworm AS backend
 RUN apt-get update && apt-get install -y --no-install-recommends cmake \
     && rm -rf /var/lib/apt/lists/*
@@ -20,7 +19,6 @@ RUN mkdir src && echo "fn main() {}" > src/main.rs \
 COPY backend/src ./src
 RUN touch src/main.rs && cargo build --release
 
-# 3. aşama: çalışma imajı
 FROM debian:bookworm-slim
 RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates \
     && rm -rf /var/lib/apt/lists/* \
