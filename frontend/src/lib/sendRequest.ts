@@ -11,27 +11,19 @@ export function toPayload(cfg:RequestConfig):RequestPayload{
 }
 
 export async function  sendRequest(cfg:RequestConfig):Promise<ResponseResult> {
-    const payload =toPayload(cfg)
-    const headers = new Headers()
-    payload.headers.forEach(h=>headers.append(h.key.trim(),h.value))
-
- 
-
-    const startDate = performance.now()
-
-    const res = await fetch(cfg.url,{
-        method:cfg.method,
-        headers,
-        body: payload.body ??  undefined
-    })
-    const text = await res.text()
-    const time_ms = Math.round(performance.now()-startDate)
-    return {
-        status:res.status,
-        status_text:res.statusText,
-        headers:Array.from(res.headers.entries()).map(([key,value])=>({key,value})),
-        body:text,
-        time_ms,
-        size_bytes:new TextEncoder().encode(text).length
+    let res:Response
+    try{
+        res = await fetch("/api/proxy",{
+            method:"post",
+            headers:{"Content-Type":"application/json"},
+            body:JSON.stringify(toPayload(cfg))
+        })
+    }catch{
+        throw new Error("Backende ulaşılmadı 'cargo run ' ile başlatın")
     }
+    if (!res.ok) {
+        throw new Error((await res.text()) || `Proxy hatası (${res.status})`);
+    }
+
+    return res.json();
 }
